@@ -40,7 +40,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  //takes in user input for the shuttle launch checklist (the display)
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let faultyItems = list; // let list = document.getElementById("faultyItems"); // div id="faultyItems"
-    list.style.visibility = "hidden"; //default
+    //list.style.visibility = "hidden"; //default
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
     let fuelStatus = document.getElementById("fuelStatus");
@@ -49,22 +49,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  
   ///validation w/ alerts///
      if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
-         list.style.visibility = "hidden"; 
-         alert("All fields are required before submiting");
+         list.style.visibility = "hidden"; //redundant?
+         alert("All fields are required before submiting.");
      }
-     // else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
-     //     list.style.visibility = "hidden"; 
-     //     alert("Enter only letters for the Pilot and Co-Pilot fields.");
-     // }
-     // else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
-     //     list.style.visibility = "hidden"; 
-     //     alert("Enter only numbers for the Fuel Level and Cargo Mass fields.");
-     // } 
-     else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
-         alert("Make sure to enter valid information for each field");
+     else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
+         list.style.visibility = "hidden"; //redundant?
+         alert("Enter only letters for the Pilot and Co-Pilot fields.");
      }
+     else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
+         list.style.visibility = "hidden"; //redundant?
+         alert("Enter only numbers for the Fuel Level and Cargo Mass fields.");
+     } 
  
-  ///updates: div id="launchStatusCheck" based on test scenarios///
+  //// updates: div id="launchStatusCheck" based on test scenarios ////
  
          //fuel level too low (less than 10,000L), change h2 id="launchStatus" to "Shuttle Is Not Ready For Launch" & h2.style.color = "red"
      else {
@@ -122,8 +119,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
      .then(function(response) {
          if (response.status >= 400) { //error code: 400s and 500s ??
              throw new Error ("Error: bad fetch response");
-         }
-         else {
+         } else {
              let data = response.json();
              console.log(data);
              return data;
@@ -132,10 +128,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
      return planetsReturned;
  }
  
- //returns a randomly selected planet
+ //returns a randomly selected planet from fetched json
  function pickPlanet(planets) {
-     let planetIndex = Math.floor(Math.random() * planets.length);
-     let randomSelectedPlanet = planets[planetIndex];
+     let randomSelectedPlanet = planets[Math.floor(Math.random() * planets.length)];
      return randomSelectedPlanet;
  }
  
@@ -146,12 +141,14 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  module.exports.myFetch = myFetch;
  
  
+ 
+ //NOTES:
  //.catch(error) => { console.log(error); };
  
-         // faultyItems.style.visibility = "hidden"
-         // pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
-         // copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
-         // cargoStatus.innerHTML = "Cargo mass low enough for launch"
-         // launchStatus.innerHTML = "Shuttle is ready for launch";
-         // launchStatus.style.color = "green"; 
+// faultyItems.style.visibility = "hidden"
+// pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+// copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+// cargoStatus.innerHTML = "Cargo mass low enough for launch"
+// launchStatus.innerHTML = "Shuttle is ready for launch";
+// launchStatus.style.color = "green"; 
  
