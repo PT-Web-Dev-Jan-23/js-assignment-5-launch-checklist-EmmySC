@@ -50,14 +50,20 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
   ///validation w/ alerts///
      if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
          list.style.visibility = "hidden"; //redundant?
+         launchStatus.innerHTML = "Awaiting Information Before Launch";
+         launchStatus.style.color = "black";
          alert("All fields are required before submiting.");
      }
      else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
          list.style.visibility = "hidden"; //redundant?
+         launchStatus.innerHTML = "Awaiting Information Before Launch";
+         launchStatus.style.color = "black";
          alert("Enter only letters for the Pilot and Co-Pilot fields.");
      }
      else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
          list.style.visibility = "hidden"; //redundant?
+         launchStatus.innerHTML = "Awaiting Information Before Launch";
+         launchStatus.style.color = "black";
          alert("Enter only numbers for the Fuel Level and Cargo Mass fields.");
      } 
  
